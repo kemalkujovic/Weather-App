@@ -92,3 +92,55 @@ body {
 .displayMessageError {
   background-color: red;
 }
+.input-container {
+  /* display: none; */
+}
+.weather {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+.iconWeather {
+  width: 35%;
+}
+
+.osvezenje {
+  display: flex;
+
+  border-top: 1px solid #ccc;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.left-card {
+  width: 48%;
+  border-right: 1px solid #ccc;
+  display: flex;
+  padding: 20px;
+}
+
+.right-card {
+  width: 48%;
+  display: inline-block;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-card i,
+.right-card i {
+  color: aqua;
+  font-size: 32px;
+  margin-right: 10px;
+}
+.numb {
+  padding: 10px;
+  font-size: 50px;
+}
+.descripton {
+  padding-bottom: 10px;
+  font-size: 18px;
+}

@@ -3,12 +3,14 @@ let requestBtn = document.querySelector("#sreachBtn");
 let inputCity = document.querySelector("#inputCity");
 let geoBtn = document.querySelector(".geoBtn");
 let infoText = document.querySelector(".infoText");
+let weatherSection = document.querySelector(".weather");
+let weatherImg = document.querySelector(".iconWeather");
 requestBtn.addEventListener("click", async function requestApi() {
   let city = inputCity.value;
   try {
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     const response = await axios.get(api);
-    displayWait(response);
+    await displayWait(response);
     displayMessage(response.data);
   } catch (error) {
     if (error.request.status === 404) {
@@ -41,4 +43,34 @@ function onError(error) {
   infoText.classList.add("displayMessageError");
 }
 
-function displayMessage(info) {}
+function displayMessage(info) {
+  console.log(info);
+  const city = info.name;
+  const country = info.sys.country;
+  const { description, id } = info.weather[0];
+  const { feels_like, humidity, temp } = info.main;
+  if (id == 800) {
+    weatherImg.src = "icon/clear.svg";
+  } else if (id >= 200 && id <= 232) {
+    weatherImg.src = "icon/storm.svg";
+  } else if (id >= 600 && id <= 622) {
+    weatherImg.src = "icon/snow.svg";
+  } else if (id >= 701 && id <= 781) {
+    weatherImg.src = "icon/haze.svg";
+  } else if (id >= 801 && id <= 804) {
+    weatherImg.src = "icon/cloud.svg";
+  } else if ((id >= 300 && id <= 321) || (id >= 500 && id <= 531)) {
+    weatherImg.src = "icon/rain.svg";
+  }
+
+  weatherSection.style.display = "flex";
+  document.querySelector(".input-container").style.display = "none";
+  weatherSection.querySelector(".numb").innerHTML = `${Math.floor(temp)}°C`;
+  weatherSection.querySelector(".descripton").innerHTML = description;
+  weatherSection.querySelector(".location").innerText = `${city}, ${country}`;
+  weatherSection.querySelector(".descripton").innerHTML = description;
+  weatherSection.querySelector(".left-card span").innerHTML = `${Math.floor(
+    feels_like
+  )}°C`;
+  weatherSection.querySelector(".right-card span").innerHTML = `${humidity}%`;
+}
