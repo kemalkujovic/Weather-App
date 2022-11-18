@@ -18,9 +18,9 @@ geoBtn.addEventListener("click", async function () {
 });
 async function succesFull(position) {
   const { latitude, longitude } = position.coords;
-  let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+  let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
   const response = await axios.get(api);
-  console.log(response.data);
+  displayMessage(response.data);
 }
 function onError(error) {
   console.log(error);
