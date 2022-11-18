@@ -5,13 +5,17 @@ let geoBtn = document.querySelector(".geoBtn");
 let infoText = document.querySelector(".infoText");
 let weatherSection = document.querySelector(".weather");
 let weatherImg = document.querySelector(".iconWeather");
+let arrowLeft = document.querySelector(".header i");
 requestBtn.addEventListener("click", async function requestApi() {
   let city = inputCity.value;
   try {
     let api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     const response = await axios.get(api);
-    await displayWait(response);
-    displayMessage(response.data);
+    displayWait(response);
+    setTimeout(() => {
+      displayMessage(response.data);
+    }, 1000);
+    infoText.classList.add("displayMessage");
   } catch (error) {
     if (error.request.status === 404) {
       infoText.innerHTML = `${inputCity.value} it's not valid city`;
@@ -33,10 +37,13 @@ geoBtn.addEventListener("click", async function () {
 async function succesFull(position) {
   displayWait();
   infoText.style.display = "block";
+  infoText.classList.add("displayMessage");
   const { latitude, longitude } = position.coords;
   let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
   const response = await axios.get(api);
-  displayMessage(response.data);
+  setTimeout(() => {
+    displayMessage(response.data);
+  }, 1000);
 }
 function onError(error) {
   infoText.innerHTML = error.message;
@@ -44,7 +51,9 @@ function onError(error) {
 }
 
 function displayMessage(info) {
-  console.log(info);
+  document.querySelector(".header i").style.display = "block";
+  document.querySelector(".titleW").classList.add("hiddenM");
+
   const city = info.name;
   const country = info.sys.country;
   const { description, id } = info.weather[0];
@@ -74,3 +83,13 @@ function displayMessage(info) {
   )}°C`;
   weatherSection.querySelector(".right-card span").innerHTML = `${humidity}%`;
 }
+
+arrowLeft.addEventListener("click", function () {
+  weatherSection.style.display = "none";
+  document.querySelector(".input-container").style.display = "block";
+  inputCity.value = "";
+  infoText.classList.remove("displayMessage", "infoText");
+  infoText.innerText = "";
+  document.querySelector(".header i").style.display = "none";
+  document.querySelector(".titleW").classList.remove("hiddenM");
+});
