@@ -16,8 +16,10 @@ body {
   background-color: #fff;
   border-radius: 5px;
 }
+
 .header {
   border-bottom: 1px solid #ccc;
+  padding: 10px 0px;
 }
 .header i {
   color: aqua;
@@ -64,7 +66,7 @@ body {
   content: "or";
   color: #ccc;
   font-size: 15px;
-  padding: 0px 15px;
+  padding: 10px 10px;
   background-color: #fff;
 }
 #inputCity {
@@ -84,7 +86,7 @@ body {
   width: 100%;
   border-radius: 5px;
   background-color: aqua;
-  padding: 0 15px;
+  padding: 5px 15px;
   border: 1px solid aqua;
   color: white;
   text-align: center;
@@ -99,9 +101,7 @@ body {
   color: white;
   text-align: center;
 }
-.input-container {
-  /* display: none; */
-}
+
 .weather {
   display: none;
   justify-content: center;
